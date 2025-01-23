@@ -3,18 +3,20 @@ using System;
 class URI {
 
     static void Main(string[] args) { 
-        int qtd = 0;
+       int qtd = 0;
 
         while (qtd < 3)
         {
             int soma = 0;
-            string entrada = Console.ReadLine();
 
-            while (entrada != "caw caw")
+            while (true)
             {
-                int decimalValue = ConvertBlinkToDecimal(entrada);
-                soma += decimalValue;
-                entrada = Console.ReadLine();
+                string entrada = Console.ReadLine();
+
+                if (entrada == "caw caw")
+                    break;
+
+                soma += ConvertBlinkToDecimal(entrada);
             }
 
             Console.WriteLine(soma);
@@ -24,22 +26,6 @@ class URI {
 
     static int ConvertBlinkToDecimal(string blink)
     {
-        string binarySequence = "";
-
-        foreach (char carac in blink)
-        {
-            if (carac == '-')
-            {
-                binarySequence += '0';
-            }
-            else
-            {
-                binarySequence += '1';
-            }
-        }
-
-        return Convert.ToInt32(binarySequence, 2);
+        return Convert.ToInt32(blink.Replace('-', '0').Replace('*', '1'), 2);
     }
-
-    }
-
+}
